@@ -40,7 +40,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll Down Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 animate-bounce">
         <a href="#about" className="inline-block text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
           <svg
             className="w-6 h-6 mx-auto"

@@ -19,6 +19,29 @@ skillCategories.forEach((category) => {
 
 
 
+
+  function getYearMonthDiff() {
+    const current = new Date();
+    const input = new Date("2024-09-11");
+  
+    let years = current.getFullYear() - input.getFullYear();
+    let months = current.getMonth() - input.getMonth();
+  
+    // Adjust if current month is smaller than input month
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    const total = `${years} Years ${months} Months`
+  
+    return total
+  }
+  
+
+
+
+
   return (
     <section id="about" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +57,7 @@ skillCategories.forEach((category) => {
           {/* Image */}
           <div className="flex flex-col items-center justify-center space-y-6">
             <div
-              className="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden border-4 border-white shadow-xl rounded-2xl"
+              className="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden border-4 border-white shadow-xl rounded-full"
               aria-hidden={false}
             >
               <Image
@@ -49,7 +72,7 @@ skillCategories.forEach((category) => {
                 unoptimized
               />
             </div>
-            <div className="flex items-center justify-center gap-12">
+            {/* <div className="flex items-center justify-center gap-12">
               <Link href="/resume.pdf" legacyBehavior>
                 <a
                   className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -95,7 +118,7 @@ skillCategories.forEach((category) => {
                 </svg>
                 Contact
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Bio */}
@@ -112,7 +135,7 @@ skillCategories.forEach((category) => {
 
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
               With expertise in React, Next.js, and Node.js, I&apos;ve worked on
-              projects ranging from e-commerce platforms to SaaS applications. I
+              projects ranging from e-commerce platforms to web applications. I
               focus on reliable architecture, performance, and developer
               ergonomics.
             </p>
@@ -124,7 +147,7 @@ skillCategories.forEach((category) => {
             </p>
 
             {/* Quick Facts */}
-            <div className="grid grid-cols-2 gap-4 pt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Location
@@ -138,7 +161,7 @@ skillCategories.forEach((category) => {
                   Experience
                 </p>
                 <p className="font-semibold text-gray-900 dark:text-white">
-                  1 Years 3 Months
+                {getYearMonthDiff()}
                 </p>
               </div>
               <div>
@@ -147,7 +170,7 @@ skillCategories.forEach((category) => {
                 </p>
                 <a
                   href="mailto:tendukarsuriya@gmail.com"
-                  className="font-semibold text-gray-900 dark:text-white hover:underline inline-flex items-center gap-2"
+                  className="font-semibold text-gray-900 dark:text-white hover:underline inline-flex items-center gap-2 break-all"
                   aria-label="Email Tendulkar Suriya"
                 >
                   tendukarsuriya@gmail.com

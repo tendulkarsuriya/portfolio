@@ -12,9 +12,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Your Name - Portfolio",
-  description: "Full-Stack Developer | Designer | Problem Solver - Showcasing my projects and skills",
+  title: "Tendulkar Suriya - Portfolio",
+  description: "Software Engineer",
+ 
 };
+
+
 
 export default function RootLayout({ children }) {
   return (
