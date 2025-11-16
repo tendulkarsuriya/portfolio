@@ -1,25 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import photo from "@/public/images/photo.jpg";
 // import { skillCategories } from "@/lib/skills";
 import { skillCategories } from '../../lib/skills';
-
+import photo from "../../app/photo.jpg";
 export default function About() {
 
 const skillSets = []
 
-console.log("skill}",skillCategories);
+
 
 skillCategories.forEach((category) => {
   category.skills.forEach((skill) => {
-    console.log("dsd++",skill?.name);
+  
     
     skillSets.push(skill.name);
   });
 })
 
 
-// console.log("skillsets",skillsets);
 
   return (
     <section id="about" className="py-20 bg-white dark:bg-gray-900">
@@ -40,7 +38,7 @@ skillCategories.forEach((category) => {
               aria-hidden={false}
             >
               <Image
-                src={photo}
+                src={"/photo.jpg" || photo}
                 alt="Tendulkar Suriya — Software Engineer"
                 className="object-cover"
                 priority
@@ -48,6 +46,7 @@ skillCategories.forEach((category) => {
                 fill={false}
                 width={320}
                 height={320}
+                unoptimized
               />
             </div>
             <div className="flex items-center justify-center gap-12">

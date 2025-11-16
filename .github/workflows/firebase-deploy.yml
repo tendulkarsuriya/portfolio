@@ -1,0 +1,50 @@
+name: CI / Firebase Deploy (Next static export)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    env:
+      FIREBASE_PROJECT: ${{ secrets.FIREBASE_PROJECT }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      SITE_ID: tendulkarsuriya
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (Next static export)
+        run: npm run build
+
+      - name: Verify out folder
+        run: |
+          if [ ! -d out ]; then
+            echo "out/ not found — build failed to produce static export" >&2
+            ls -la
+            exit 1
+          fi
+
+      - name: Deploy to Firebase (PR preview or main)
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            PR=${{ github.event.pull_request.number }}
+            CHANNEL="pr-${PR}"
+            firebase hosting:channel:deploy "$CHANNEL" --expires 7d --project "$FIREBASE_PROJECT" --token "$FIREBASE_TOKEN"
+            echo "Preview URL: https://${CHANNEL}--${SITE_ID}.web.app"
+          else
+            firebase deploy --only hosting --project "$FIREBASE_PROJECT" --token "$FIREBASE_TOKEN"
+          fi
